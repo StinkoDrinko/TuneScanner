@@ -14,14 +14,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void StartRecord (View view){
         try {
-            sound.start();
+            sound.startRecording();
         }
         catch (Exception e) {
             Toast.makeText(this,e.getMessage(),Toast.LENGTH_LONG).show();
         }
     }
     public void StopRecord(View view){
-        sound.stop();
+        sound.stopRecording();
     }
     public void StartPlayBack(View view){
         try{
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        sound = new SoundReader(getFilesDir().getAbsolutePath()+ "temp.3gp");
+        sound = new SoundReader(getFilesDir().getAbsolutePath()+ "temp.wav", this);
 
     }
 }
