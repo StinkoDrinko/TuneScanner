@@ -37,6 +37,7 @@ public class SoundPlayer {
 
     public void stopPlayback() {
         player.stop();
+        player.release();
     }
 
     private MediaPlayer player;
