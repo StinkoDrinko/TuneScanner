@@ -30,14 +30,21 @@ public class SoundPlayer {
     }
 
     public void startPlayback() throws IOException {
-        player.setDataSource(soundFile.getAbsolutePath());
-        player.prepare();
-        player.start();
+        if (player == null) {
+            player = new MediaPlayer();
+        }
+            player.setDataSource(soundFile.getAbsolutePath());
+            player.prepare();
+            player.start();
+
     }
 
     public void stopPlayback() {
-        player.stop();
-        player.release();
+        if (player!=null){
+            player.stop();
+            player.release();
+            player=null;
+        }
     }
 
     private MediaPlayer player;

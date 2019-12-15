@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class SoundReader {
-    final MediaRecorder recorder = new MediaRecorder();
+    private MediaRecorder recorder;
     final String path;
 
     public SoundReader(String path){
@@ -32,6 +32,8 @@ public class SoundReader {
         if (!directory.exists()&& !directory.mkdir()){
             throw new IOException("Path to file could not be created.");
         }
+        if(recorder == null)
+            recorder = new MediaRecorder();
         recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
         recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
@@ -39,10 +41,13 @@ public class SoundReader {
         recorder.prepare();
         recorder.start();
     }
-    public void stop() throws IOException{
-        recorder.stop();
-        recorder.release();
+    public void stop() {
+        if (recorder!= null) {
 
+            recorder.stop();
+            recorder.release();
+            recorder = null;
+        }
     }
 
 

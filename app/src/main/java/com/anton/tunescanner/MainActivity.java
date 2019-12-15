@@ -5,35 +5,43 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import java.io.File;
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
     private SoundReader sound;
-    public void Listener (View view){
+    private SoundPlayer player;
 
+    public void StartRecord (View view){
         try {
             sound.start();
-
         }
         catch (Exception e) {
             Toast.makeText(this,e.getMessage(),Toast.LENGTH_LONG).show();
-
-
         }
-
-
     }
-public void Stop(View view){
+    public void StopRecord(View view){
+        sound.stop();
+    }
+    public void StartPlayBack(View view){
         try{
-            sound.stop();
+            File file = new File(getFilesDir().getAbsolutePath()+ "temp.3gp");
+            player = new SoundPlayer(file);
+            player.startPlayback();
         }
-        catch (IOException f){
-            Toast.makeText(this,f.getMessage(),Toast.LENGTH_LONG).show();
+        catch (IOException g){
+            Toast.makeText(this,g.getMessage(),Toast.LENGTH_LONG).show();
         }
-}
+        catch (IllegalArgumentException g){
+            Toast.makeText(this,g.getMessage(),Toast.LENGTH_LONG).show();
+        }
+    }
 
-
-
+    public void StopPlayback (View view){
+        if (player!=null) {
+            player.stopPlayback();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
