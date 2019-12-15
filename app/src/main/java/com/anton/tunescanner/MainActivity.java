@@ -25,14 +25,11 @@ public class MainActivity extends AppCompatActivity {
     }
     public void StartPlayBack(View view){
         try{
-            File file = new File(getFilesDir().getAbsolutePath()+ "temp.3gp");
+            File file = new File(getFilesDir().getAbsolutePath()+ "temp.wav");
             player = new SoundPlayer(file);
             player.startPlayback();
         }
-        catch (IOException g){
-            Toast.makeText(this,g.getMessage(),Toast.LENGTH_LONG).show();
-        }
-        catch (IllegalArgumentException g){
+        catch (IOException | IllegalArgumentException g){
             Toast.makeText(this,g.getMessage(),Toast.LENGTH_LONG).show();
         }
     }
@@ -41,6 +38,10 @@ public class MainActivity extends AppCompatActivity {
         if (player!=null) {
             player.stopPlayback();
         }
+    }
+
+    public void startReversePlayback(View view) {
+        //WAVReverser reverser = new WAVReverser()
     }
 
     @Override

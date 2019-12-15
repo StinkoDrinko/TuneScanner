@@ -1,14 +1,13 @@
 package com.anton.tunescanner;
 
 import android.media.MediaRecorder;
-import android.os.Environment;
 
 import java.io.File;
 import java.io.IOException;
 
-public class SoundReader {
+class SoundReader {
     private MediaRecorder recorder;
-    final String path;
+    private final String path;
 
     public SoundReader(String path){
         this.path = sanitizePath(path);
@@ -29,7 +28,7 @@ public class SoundReader {
         //    throw new IOException("No Sd Card Mounted. It is " + state +".");
         //}
         File directory =new File(path).getParentFile();
-        if (!directory.exists()&& !directory.mkdir()){
+        if (directory != null && !directory.exists() && !directory.mkdir()){
             throw new IOException("Path to file could not be created.");
         }
         if(recorder == null)

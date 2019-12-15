@@ -5,7 +5,7 @@ import android.media.MediaPlayer;
 import java.io.File;
 import java.io.IOException;
 
-public class SoundPlayer {
+class SoundPlayer {
 
     public SoundPlayer(File soundFile) throws IllegalArgumentException {
         if(!checkFile(soundFile))
